@@ -1,10 +1,14 @@
 # README_20213002
 
+***
+
 ## 1. 명령어 (top, ps, jobs, kill)
-- top
-- ps
-- jobs
-- kill
+- ### top
+- ### ps
+- ### jobs
+- ### kill
+
+***
 
 ## 2. vim 에디터 매크로 활용 방법
 
@@ -17,3 +21,5 @@
 4) @[Name] : Name이라는 이름의 매크로를 실행한다.
 
 ex) qa
+
+***
