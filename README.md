@@ -8,11 +8,11 @@
 
 # 1. Linux 명령어 (top, ps, jobs, kill)
 ## 1.1. top (table of processes)
-  top(table of processes)은 실시간으로 CPU 사용률을 보여준다. 
+  top(table of processes)은 실시간으로 프로세스 목록을 보여준다. 
   
   얼마나 많은 처리량과 메모리가 사용되는지, 실행 중인 프로세스에 관한 기타 정보도 보여준다.
   
-  3초 간격으로 업데이트 되며 옵션이 없을 시 CPU 사용률 순서로 정렬됨.
+  3초 간격으로 업데이트 되며 옵션이 없을 시 CPU 사용률 순서로 정렬됨
   
   사용법 : $ top [option]    *\*빠져나가는 방법 : Ctrl+C, q 등*
   
@@ -20,16 +20,12 @@
   
   |옵션|내용|
   |:---:|:---:|
-  |-b|배치모드로 정보를 출력. 실시간 상화 대화형 모드로 정보를 화면에 일렬로 출력|
+  |-b|Batch 모드로 정보를 출력. 실시간 상화 대화형 모드로 정보를 화면에 일렬로 출력|
   |-d dealy|지정한 시간(dealy 초)의 간격으로 정보를 업데이트하여 출력|
   |-i idle|토글 값이 off일 때, idle 프로세스나 좀비 프로세스 정보를 출력하지 않음|
   |-n num|지정한 시간(num)만큼 업데이트 정보를 출력|
   |-p pid|지정한 프로세스 ID(pid)의 정보만 출력|
-  |-q|시간의 간격 없이 계속하여 업데이트 정보를 출력|
-  |-s|몇 개의 대화식 명령을 비활성화|
-  |-S|누적된 정보 출력|
   
-  *top 명령어 실행 후 'h'키 입력시 사용할 수 있는 단축키 목록을 확인 할 수 있음.*
   
 - ### 1.1.2. 명령어 실행시 정보
   
@@ -44,11 +40,11 @@
         
            - top - 14:33:57 : 14시 33분 57초 현재 서버의 시간
            - up : 가동 중
-           - 30 min : 30분 째
-           - 0 users : 0명의 사용자가 접속
-           - load average: 0.05, 0.02, 0.00 : 부하율, 차례대로 1분, 5분, 15분 간의 평균 실행/대기중인 프로세스의 수
+           - min : 가동 중인 시간
+           - users : 접속한 사용자 수
+           - load average: 0.05, 0.02, 0.00 : 부하율, 차례대로 1분, 5분, 15분 간의 평균 실행/대기중인 프로세스의 수 (값이 1일 시 1분동안 평균 1개의 프로세스가 대기중)
          
-     - 두번째 줄 (프로세스 정보)
+     - 두번째 줄 (프로세스 정보 - Tasks)
 
         ![image](https://user-images.githubusercontent.com/106478413/171388983-1a2adbbb-3da3-4956-afe5-ff0a85031f2e.png)
 
@@ -58,20 +54,20 @@
            - stopped : 멈춘 프로세스 수
            - zomibie : 좀비 상태인 프로세스 수
    
-     - 세번째 줄 (CPU 정보)
+     - 세번째 줄 (CPU 비율 정보 - %Cpu(s))
 
         ![image](https://user-images.githubusercontent.com/106478413/171389139-e3de0286-0347-46dd-acd6-bc3bd9a9ab32.png)
 
-           - us : 유저 레벨에서 사용하고 있는 CPU 비중
-           - sy : 시스템 레벨에서 사용하고 있는 CPU 비중
+           - us : 유저 레벨에서의 CPU 사용률
+           - sy : 시스템 레벨에서의 CPU 사용률
            - ni : nice 정책에 의해 사용중인 CPU 사용률
-           - id : 유휴 상태의 CPU 비중
-           - wa : 시스템이 I/O 요청을 처리하지 못한 상태에서의 CPU idle 상태인 비중
-           - hi : IRQs에 사용된 CPU 사용률
-           - si : softIRQs에 사용된 CPU 사용률
+           - id : 유휴 상태의 CPU 비율
+           - wa : 시스템이 I/O 요청을 처리하지 못한 상태에서의 CPU idle 상태인 비율
+           - hi : IRQs(하드웨어 인터럽트)에 사용된 CPU 사용률
+           - si : softIRQs(소프트웨어 인터럽트)에 사용된 CPU 사용률
            - st : CPU Steal 되어진 값을 의미
       
-     - 네번째 줄 (메모리 정보 - MiB MeM)
+     - 네번째 줄 (메모리 사용량 정보 - MiB MeM)
   
         ![image](https://user-images.githubusercontent.com/106478413/171389264-89a35a21-2f2f-4f9e-97b5-a3022b1716ec.png)
 
@@ -80,7 +76,7 @@
            - used : 사용 중인 메모리
            - buff/cache : 버퍼된 메모리
      
-     - 다섯번째 줄 (메모리 정보 - MiB Swap)
+     - 다섯번째 줄 (메모리 사용량 정보 - MiB Swap)
      
         ![image](https://user-images.githubusercontent.com/106478413/171389383-1c4cc952-500d-4f5c-bc83-8e8d975ebe35.png)
 
@@ -103,10 +99,20 @@
            - S : 프로세스의 상태 <S(sleeping), R(running), W(swapped out process), Z(zombie)>
            - %CPU : 프로세스가 사용하는 CPU의 사용률
            - %MEM : 프로세스가 사용하는 메모리의 사용률
-           - TIME+ : 
+           - TIME+ : 프로세스가 시작된 이후 경과된 총 시간
            - COMMAND : 실행된 명령어
  
- 
+ - ### 1.1.3. 명령어 옵션 (top 실행 중)
+    
+      |옵션|내용|
+      |:---:|:---:|
+      |shift + p|CPU 사용률이 높은 프로세스 순서대로 표시|
+      |shift + m|메모리 사용률이 높은 프로세스 순서대료 표시|
+      |shift + t|프로세스가 돌아가고 있는 시간 순서대로 표시|
+      |a|메모리 사용량에 따라 정렬|
+      |b|Batch 모드로 작동|
+      |h|도움말 (사용할 수 있는 단축키 목록)|
+      |k|kill 명령어 (process kill)|
  
  
 ## 1.2. ps
@@ -143,7 +149,7 @@
  
    - **예시**
   
-      ![image](https://user-images.githubusercontent.com/106478413/171428835-fd15d944-e1a0-4ba4-b798-81b37ce5efa1.png)
+      ![image](https://user-images.githubusercontent.com/106478413/171433370-39bab20a-a46a-4c85-a4d5-8e7577822927.png)
   
       *▲ ps -ef | grep gayun*
   
@@ -162,6 +168,7 @@
   |옵션|내용|
   |:---:|:---:|
   |-l|프로세스 ID를 추가로 출력|
+  |-n|대표 프로세스 ID를 출력|
   |-p|각 프로세스 ID에 대해 한 행씩 출력|
   
 ## 1.4. kill
@@ -193,7 +200,7 @@
   |1) SIGHUP|세션이 종료될 때 시스템이 내리는 시그널|
   |2) SIGINT|Ctrl+C, 종료 요청 시그널|
   |9) SIGKILL|강제 종료 시그널|
-  |15) SIGTERM||프로그램 종료 시그널|
+  |15) SIGTERM|프로그램 종료 시그널|
   |20) SIGSTP|Ctrl+Z, 일시 중지 요청 시그널|
   
   **프로세스를 안전하게 종료시키려면 SIGKILL을 이용한 종료는 가급적 사용하지 않는 것이 좋다. (데이터가 유실될 수 있음)**
