@@ -154,6 +154,19 @@
    - [Number]@[Name] : [Number]만큼의 매크로를 실행함.
    - @@ : 가장 최근 재생된 매크로가 재생됨.
 
-  ex) qa
+  ex) 모든 행을 주석 처리하는 매크로 qai//<ESC>+q
+  
+  - qa를 눌렀을 때 화면
+  
+  ![image](https://user-images.githubusercontent.com/106478413/171400086-78520ecb-0c22-4562-96f2-ded94603fa2a.png)
+  
+  - 명령어 입력 i//<ESC>+ 하고 종료 q 했을 때 화면
+  
+  ![image](https://user-images.githubusercontent.com/106478413/171401441-d6e6faff-1fd8-4760-b298-b8d485a28577.png)  
 
+  - 매크로 실행하는 화면 (전체 행 주석처리 하기 위하여 3@a 입력)
+  
+  ![image](https://user-images.githubusercontent.com/106478413/171401728-f0b75577-44e0-43b6-9d04-4a61bacd1a14.png)
+
+  *▲ 모든 행이 주석처리 되었다.*
 ***
