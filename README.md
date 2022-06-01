@@ -7,7 +7,7 @@
 ***
 
 # 1. Linux 명령어 (top, ps, jobs, kill)
-- ## 1.1. top (table of processes)
+## 1.1. top (table of processes)
   top(table of processes)은 실시간으로 CPU 사용률을 보여준다. 
   
   얼마나 많은 처리량과 메모리가 사용되는지, 실행 중인 프로세스에 관한 기타 정보도 보여준다.
@@ -16,7 +16,7 @@
   
   사용법 : $ top [option]    *\*빠져나가는 방법 : Ctrl+C, q 등*
   
-  - **옵션(option)**
+- ### 1.1.1. 옵션(option)
   
   |옵션|내용|
   |:---:|:---:|
@@ -31,12 +31,13 @@
   
   *top 명령어 실행 후 'h'키 입력시 사용할 수 있는 단축키 목록을 확인 할 수 있음.*
   
-  
+- ### 1.1.2. 명령어 실행시 정보
   
      ![image](https://user-images.githubusercontent.com/106478413/171334889-5c91d0a1-167d-4557-9207-e5b150962b7b.png)
    
      *▲ 터미널에 top 명령어 실행시 뜨는 화면*
-     
+ 
+
      - 첫번째 줄 (서버 정보)
 
         ![image](https://user-images.githubusercontent.com/106478413/171388872-b546a5d4-b87e-4c51-8103-8c05110bbbc7.png)
@@ -88,7 +89,7 @@
            - used : 사용 중인 스왑 메모리
            - avail Mem : 캐싱 메모리
 
-     - 프로세스 정보
+     - 프로세스 상태 정보
         
         ![image](https://user-images.githubusercontent.com/106478413/171388500-5bc4b937-d422-4ebd-b6b4-48dee15ec210.png)
 
@@ -108,12 +109,12 @@
  
  
  
-- ## 1.2. ps
+## 1.2. ps
   ps(process status)는 현재 실행중인 프로세스의 목록과 상태를 보는 명령어이다.
   
   사용법 : $ ps [option]
   
-  - **옵션(option)**
+- ### 1.2.1. 옵션(option)
   
   |옵션|내용|
   |:---:|:---:|
@@ -123,9 +124,11 @@
   |-f|full format으로 세션의 정보를 표시함|
   |-ef|-e와 -f의 옵션 조합. 모든 프로세스를 full format으로 보여줌|
   
+- ### 1.2.2. 명령어 실행시 정보
+
   ![image](https://user-images.githubusercontent.com/106478413/171409196-d4dc5b3b-2468-41b6-a55b-3de030cc1c35.png)
 
-  *▲ ps -ef 한 화면*
+  *▲ ps -ef*
   
       - UID : 프로세스를 실행한 사람 (User ID)
       - PID : 프로세스를 구분하기 위해 만들어진 프로세스 ID (Process ID)
@@ -136,44 +139,69 @@
       - TIME : CPU 점유 시간
       - CMD : command
 
-
-- ## 1.3. jobs
+- ### 1.2.3. 파이프와 grep 이용
+ 
+   - **예시**
+  
+      ![image](https://user-images.githubusercontent.com/106478413/171428835-fd15d944-e1a0-4ba4-b798-81b37ce5efa1.png)
+  
+      *▲ ps -ef | grep gayun*
+  
+       ex) ps -ef | grep gayun
+   
+        파이프와 grep을 이용하여 gayun을 포함하고 있는 작동하는 프로세스 검색
+  
+  
+## 1.3. jobs
   jobs는 작업이 중지된 상태, 백그라운드로 진행 중인 상태 등을 표시하는 명령어 이다.
   
   사용법 : $ jobs [option] [job ID]
   
-  - **옵션**
+- ### 1.3.1. 옵션(option)
   
   |옵션|내용|
   |:---:|:---:|
   |-l|프로세스 ID를 추가로 출력|
   |-p|각 프로세스 ID에 대해 한 행씩 출력|
   
-- ## 1.4. kill
+## 1.4. kill
   프로세스에 특정한 signal을 보내는 명령어 이다. 일반적으로 종료되지 않는 프로세스를 종료 시킬 때 많이 사용한다.
   
   사용법 : $ kill [option or signal] PID
   
-  - **signal list ( $ kill -l )**
+  option과 signal을 주지 않을 시 기본 값으로 SIGTERM이 전달된다. *\*SIGTERM : 프로그램 종료*
+  
+      *  사용 예시
+     
+      $ kill -SIGINT PID
+      $ kill -INT PID
+      $ kill -2 PID
+      
+      > 위 세가지는 모두 같은 뜻 이다.
+  
+- ### 1.4.1. signal list ( $ kill -l )
   
   ![image](https://user-images.githubusercontent.com/106478413/171406416-97f4ab7d-196b-478f-85ba-c9f8ec6c6d27.png)
 
   *▲ signal list*
   
-  - **자주 쓰는 signal**
-  
+- ### 1.4.2. 자주 쓰는 signal
+ 
   
   |signal|내용|
   |:---:|:---:|
   |1) SIGHUP|세션이 종료될 때 시스템이 내리는 시그널|
   |2) SIGINT|Ctrl+C, 종료 요청 시그널|
   |9) SIGKILL|강제 종료 시그널|
+  |15) SIGTERM||프로그램 종료 시그널|
   |20) SIGSTP|Ctrl+Z, 일시 중지 요청 시그널|
   
-  **프로세스를 안전하게 종료시키려면 SIGKILL을 이용한 종료는 가급적 사용하지 않는 것이 좋다.**
+  **프로세스를 안전하게 종료시키려면 SIGKILL을 이용한 종료는 가급적 사용하지 않는 것이 좋다. (데이터가 유실될 수 있음)**
 ***
 
 # 2. Linux vim 에디터 매크로 활용 방법
+
+## 2.1. 사용 방법
 
 - **기본 형태 : q[Name][Commands]q**
 
@@ -188,17 +216,19 @@
    - [Number]@[Name] : [Number]만큼의 매크로를 실행함.
    - @@ : 가장 최근 재생된 매크로가 재생됨.
 
-  ex) 모든 행을 주석 처리하는 매크로 qai//<ESC>+q
+## 2.2. 사용 예시
   
-  - qa를 눌렀을 때 화면
+**모든 행을 주석 처리하는 매크로 qai//<ESC>+q**
+  
+- qa를 눌렀을 때 화면
   
   ![image](https://user-images.githubusercontent.com/106478413/171400086-78520ecb-0c22-4562-96f2-ded94603fa2a.png)
   
-  - 명령어 입력 i//<ESC>+ 하고 종료 q 했을 때 화면
+- 명령어 입력 i//<ESC>+ 하고 종료 q 했을 때 화면
   
   ![image](https://user-images.githubusercontent.com/106478413/171401441-d6e6faff-1fd8-4760-b298-b8d485a28577.png)  
 
-  - 매크로 실행하는 화면 (전체 행 주석처리 하기 위하여 3@a 입력)
+- 매크로 실행하는 화면 (전체 행 주석처리 하기 위하여 3@a 입력)
   
   ![image](https://user-images.githubusercontent.com/106478413/171401728-f0b75577-44e0-43b6-9d04-4a61bacd1a14.png)
 
